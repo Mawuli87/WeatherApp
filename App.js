@@ -48,11 +48,22 @@ export default function App() {
   async function fetchWeatherByCoords(coords) {
     const weatherResponse = await MeteoAPI.fetchWeatherByCoords(coords);
     setWeather(weatherResponse);
+    // console.log(weatherResponse);
   }
 
   async function fetchCityByCoords(coords) {
     const cityResponse = await MeteoAPI.fetchCityByCoords(coords);
     setCity(cityResponse);
+    console.log(cityResponse);
+  }
+
+  async function fetchCoordsByCity(city) {
+    try {
+      const coordsResponse = await MeteoAPI.fetchCoordsByCity(city);
+      setCoordinates(coordsResponse);
+    } catch (err) {
+      Alert.alert("Aouch !", err);
+    }
   }
 
   async function getUserCoordinates() {
@@ -88,7 +99,13 @@ export default function App() {
                 initialRouteName="Home"
               >
                 <Stack.Screen name="Home">
-                  {() => <Home city={city} weather={weather} />}
+                  {() => (
+                    <Home
+                      city={city}
+                      weather={weather}
+                      onSubmitSearch={fetchCoordsByCity}
+                    />
+                  )}
                 </Stack.Screen>
                 <Stack.Screen name="Forecasts" component={Forecasts} />
               </Stack.Navigator>

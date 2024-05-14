@@ -11,6 +11,7 @@ export function MeteoBasic({
   dailyWeather,
 }) {
   const nav = useNavigation();
+  const image = interpretation.image;
   return (
     <>
       <View style={s.clock}>
@@ -26,7 +27,9 @@ export function MeteoBasic({
 
       <View style={s.temperature_box}>
         <TouchableOpacity
-          onPress={() => nav.navigate("Forecasts", { city, ...dailyWeather })}
+          onPress={() =>
+            nav.navigate("Forecasts", { city, image, ...dailyWeather })
+          }
         >
           <Txt style={s.temperature}>{temperature}°</Txt>
         </TouchableOpacity>

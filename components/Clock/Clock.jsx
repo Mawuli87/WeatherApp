@@ -8,7 +8,7 @@ export function Clock() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTime(nowToHHMM());
-      console.log(nowToHHMM());
+      // console.log(nowToHHMM());
     }, 1000);
 
     return () => {
